@@ -24,7 +24,6 @@ class BookPage extends Component {
 
   render() {
     const { book, isLoaded } = this.state;
-    console.log(book);
     if (isLoaded) {
       return (
         <Fragment>

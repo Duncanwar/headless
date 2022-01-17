@@ -18,11 +18,7 @@ export class BookItems extends Component {
     const { featured_media, author } = this.props.book;
     const getImageUrl = axios.get(`${url}/media/${featured_media}`);
     const getAuthor = axios.get(`${url}/users/${author}`);
-    async function log() {
-      const { data } = await axios.get(`${url}/books`);
-      console.log(data);
-    }
-    log();
+
     Promise.all([getImageUrl, getAuthor]).then((res) => {
       this.setState({
         imgUrl: res[0].data.media_details.sizes.full.source_url,
@@ -35,7 +31,6 @@ export class BookItems extends Component {
   render() {
     const { id, title } = this.props.book;
     const { author, imgUrl, isLoaded } = this.state;
-    console.log(this.state);
     if (isLoaded) {
       return (
         <div className="row">
