@@ -1,35 +1,46 @@
-import React, { Component } from "react";
 import axios from "axios";
-import BookItems from "./BookItems";
-export class Books extends Component {
+import React, { Component } from "react";
+import { Fragment } from "react";
+import { Link } from "react-router-dom";
+const url =
+  "http://os7.techaffinity.us/php-training/duncan/wp_headless/index.php/wp-json/wp/v2/books";
+
+class BookPage extends Component {
   state = {
-    books: [],
+    book: {},
     isLoaded: false,
   };
   componentDidMount() {
     axios
-      .get("http://localhost/php-duncan/headless/wp-json/wp/v2/books/")
-        .then((res) => {
-            this.setState({
-                books: res.data,
-                isLoaded: true,
-            })
-        })
+      .get(`${url}/${this.props.match.params.id}`)
+      .then((res) => {
+        this.setState({
+          book: res.data,
+          isLoaded: true,
+        });
+      })
       .catch((err) => console.log(err));
   }
+
   render() {
-    const { books, isLoaded } = this.state;
-    console.log(books);
+    const { book, isLoaded } = this.state;
+    console.log(book);
     if (isLoaded) {
       return (
-        <div>
-          {books.map((book) => (
-              <BookItems key={book.id} book={book}/>
-          ))}
-        </div>
+        <Fragment>
+          <Link to="/">Go Back</Link>
+          <hr />
+          <br />
+          <h3>{book.title}</h3>
+          <div
+            dangerouslySetInnerHTML={{ __html: book.content.rendered }}
+          ></div>
+          <h4>Publisher: {book.acf.publisher}</h4>
+        </Fragment>
       );
     }
     return <h3>Loading...</h3>;
   }
 }
-export default Books;
+
+export default BookPage;
