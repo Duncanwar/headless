@@ -8,9 +8,9 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <Router>
+        <Router basename="/php-training/duncan">
           <Fragment>
-            <Route exact path="/" component={Books} />
+            <Route exact path="/book" component={Books} />
             <Route exact path="/book/:id" component={BookPage} />
           </Fragment>
         </Router>

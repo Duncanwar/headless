@@ -1,6 +1,7 @@
 {
   "name": "react-headless",
   "version": "0.1.0",
+  "homepage": "http://os7.techaffinity.us/php-training/duncan/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
